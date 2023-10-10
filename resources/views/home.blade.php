@@ -5,16 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Welcome') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    @auth
+                        <h4>Hello, {{ Auth::user()->name }}</h4>
+                        <p>Welcome to task manager!</p>
+                    @endauth
 
-                    {{ __('You are logged in!') }}
+                    @guest
+                        <h4>Login</h4>
+                        <p><a href="{{ route('login') }}">Signin on youe account.</a></p>
+                    @endguest
                 </div>
             </div>
         </div>
